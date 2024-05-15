@@ -1,0 +1,9 @@
+﻿  progonka.cpp
+D:\С++\PARalel\Header.h(38,8): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+D:\С++\PARalel\Header.h(112,8): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+D:\С++\PARalel\Header.h(117,11): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+D:\С++\PARalel\Header.h(118,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+D:\С++\PARalel\Header.h(146,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+D:\С++\PARalel\Header.h(147,11): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+D:\С++\PARalel\Header.h(179,8): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+  PARalel.vcxproj -> D:\С++\PARalel\x64\Debug\PARalel.exe
