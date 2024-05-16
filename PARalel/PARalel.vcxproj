@@ -130,7 +130,7 @@
     <ClCompile Include="progonka.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h" />
+    <ClInclude Include="cyclic_reduction_header.h" />
     <ClInclude Include="Param_Progonka.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

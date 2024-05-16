@@ -23,7 +23,7 @@
     <ClInclude Include="Param_Progonka.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="cyclic_reduction_header.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿#include "Param_Progonka.h"
-#include "Header.h"
+#include "cyclic_reduction_header.h"
 
 void progonka() {
 	for (int i = 1; i <= 4; i = i * 2) {
@@ -13,7 +13,7 @@ void progonka() {
 void cyclic_reductionStart() {
 	for (int i = 1; i <= 4; i = i * 2) {
 		for (int j = 9; j <= 12; j ++) {
-			std::cout << std::endl << "Param progonka n=" << pow(2,j) << " p=" << i << std::endl;
+			std::cout << std::endl << "cyclic_reduction n=" << pow(2,j) << " p=" << i << std::endl;
 			reduction_start(j, i);
 		}
 	}
@@ -22,6 +22,6 @@ void cyclic_reductionStart() {
 
 int main()
 {	
-	//progonka();
+	progonka();
 	cyclic_reductionStart();
 }

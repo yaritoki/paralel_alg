@@ -37,7 +37,7 @@ void ParamProgonka(int n,int p)
     
 
     int   m;
-    double  h, A, B, ua, ub, a, c;
+    double  h, A, B, u_a, u_b, a, c;
 
 
    
@@ -47,8 +47,8 @@ void ParamProgonka(int n,int p)
 
    
     h = (B - A) / (n + 2);
-    ua = u_func(A);
-    ub = u_func(B);
+    u_a = u_func(A);
+    u_b = u_func(B);
 
     
     m = n / p;
@@ -68,27 +68,27 @@ void ParamProgonka(int n,int p)
     a = 1;
    
     c = 1;
-    f[0] += ua;
-    f[n] += ub;
+    f[0] += u_a;
+    f[n] += u_b;
 
     double max = 0;
 
-    double* al = new double[n + 1];
-    double* bt = new double[n + 1];
+    double* alpha = new double[n + 1];
+    double* betta = new double[n + 1];
 
 
-    al[0] = c / b[0];
-    bt[0] = f[0] / b[0];
+    alpha[0] = c / b[0];
+    betta[0] = f[0] / b[0];
     for (int j = 1; j <= n; j++)
     {
-        double div = b[j] - a * al[j - 1];
-        al[j] = c / div;
-        bt[j] = (f[j] + a * bt[j - 1]) / div;
+        double div = b[j] - a * alpha[j - 1];
+        alpha[j] = c / div;
+        betta[j] = (f[j] + a * betta[j - 1]) / div;
     }
-    y[n] = bt[n];
+    y[n] = betta[n];
     for (int j = n - 1; j >= 0; j--)
     {
-        y[j] = al[j] * y[j + 1] + bt[j];
+        y[j] = alpha[j] * y[j + 1] + betta[j];
     }
 
    
@@ -157,8 +157,8 @@ void ParamProgonka(int n,int p)
         }
     }
 
-    al[0] = c * z[0][1] / (b[0] - c * v[0][1]);
-    bt[0] = (f[0] + c * w[0][1]) / (b[0] - c * v[0][1]);
+    alpha[0] = c * z[0][1] / (b[0] - c * v[0][1]);
+    betta[0] = (f[0] + c * w[0][1]) / (b[0] - c * v[0][1]);
 #pragma omp parallel
     {
 #pragma omp for
@@ -166,22 +166,22 @@ void ParamProgonka(int n,int p)
         {
             if (mu == p)
             {
-                double div = b[mu] - a * z[mu - 1][m - 1] - a * v[mu - 1][m - 1] * al[mu - 1];
-                bt[mu] = (f[mu * m] + a * w[mu - 1][m - 1] + a * v[mu - 1][m - 1] * bt[mu - 1]) / div;
+                double div = b[mu] - a * z[mu - 1][m - 1] - a * v[mu - 1][m - 1] * alpha[mu - 1];
+                betta[mu] = (f[mu * m] + a * w[mu - 1][m - 1] + a * v[mu - 1][m - 1] * betta[mu - 1]) / div;
             }
             else
             {
-                double div = b[mu] - a * z[mu - 1][m - 1] - c * v[mu][1] - a * v[mu - 1][m - 1] * al[mu - 1];
-                al[mu] = c * z[mu][1] / div;
-                bt[mu] = (f[mu * m] + a * w[mu - 1][m - 1] + c * w[mu][1] + a * v[mu - 1][m - 1] * bt[mu - 1]) / div;
+                double div = b[mu] - a * z[mu - 1][m - 1] - c * v[mu][1] - a * v[mu - 1][m - 1] * alpha[mu - 1];
+                alpha[mu] = c * z[mu][1] / div;
+                betta[mu] = (f[mu * m] + a * w[mu - 1][m - 1] + c * w[mu][1] + a * v[mu - 1][m - 1] * betta[mu - 1]) / div;
             }
         }
     }
-    x_[p] = bt[p];
+    x_[p] = betta[p];
 
     for (int mu = p - 1; mu >= 0; mu--)
     {
-        x_[mu] = al[mu] * x_[mu + 1] + bt[mu];
+        x_[mu] = alpha[mu] * x_[mu + 1] + betta[mu];
     }
 
 #pragma omp parallel
@@ -216,6 +216,7 @@ void ParamProgonka(int n,int p)
    
     auto time = duration_cast<microseconds>(end - start);
     cout <<"param_progonka " << time.count() << " " << clock() << endl;
+
    
 
 }
